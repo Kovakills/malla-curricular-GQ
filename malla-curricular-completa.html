@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiología y Bioanálisis - Malla Curricular</title>
+    <meta name="description" content="Seguimiento de malla curricular para Microbiología y Bioanálisis">
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiTWljcm9iaW9sb2fDrWEgeSBCaW9hbsOhbGlzaXMiLCJzaG9ydF9uYW1lIjoiTWFsbGEgQ3VycmljdWxhciIsImRlc2NyaXB0aW9uIjoiU2VndWltaWVudG8gZGUgbWFsbGEgY3VycmljdWxhciIsInN0YXJ0X3VybCI6Ii8iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZmZmZmZmIiwidGhlbWVfY29sb3IiOiIjMjU2M2ViIiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjNhV1IwYUQwaU1qUWlJR2hsYVdkb2REMGlNalFpSUhabGNuTnBiMjQ5SWpFdU1TSWdlRzFzYm5NOUltaDBkSEE2THk5M2QzY3Vkek11YjNKbkx6SXdNREF2YzNabklpQjJhV1YzUW05NFBTSXdJREFnTWpRZ01qUWlQaUE4Y0dGMGFDQmtQU0pOTVRJZ01rTXhNaTQxTlRRZ01pNDFOVFFnTVRNdU1EUTJJRE5nTVRNZ00wTXhNeTQxTlRRZ00wTXhOQ0F6TGpRME5pQXhOQ0EwVERFMElERXdRekUwSURFd0xqVTFOQ0F4TXk0MU5UUWdNVEVnTVRNZ01URkRNVEl1TkRRMklERXhJREV5SURFd0xqVTFOQ0F4TWlBeFNVMHhNaUF4TjBNeE1pNDFOVFFnTVRjdU5EVTJJREUwSURFNElERTBJREU0UXpFMElERTRMalUxTkNBeE15NDFOVFFNRUU1SURFeklERTlEeXdnTVRNZ01UbERNVEl1TkRRMklERTVJREV5SURFNExqVTFOQ0F4TWlBeE4wMHhNaUF4TjFvaUx6NGdQQzl6ZG1jKyIsInNpemVzIjoiMjR4MjQiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2563eb;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .progress-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            border-radius: 12px;
+            height: 12px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #10b981, #059669);
+            height: 100%;
+            border-radius: 12px;
+            transition: width 0.3s ease;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding: 4px;
+        }
+
+        .tab {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab.active {
+            background: white;
+            color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+
+        .semester-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .subjects-grid {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        .subject-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .subject-card.approved {
+            background: #dcfce7;
+            border-color: #16a34a;
+        }
+
+        .subject-card.in-progress {
+            background: #dbeafe;
+            border-color: #2563eb;
+        }
+
+        .subject-card.blocked {
+            background: #fef2f2;
+            border-color: #dc2626;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .subject-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .subject-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .subject-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .status-approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-in-progress {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-blocked {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        .prerequisites {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .legend {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .legend h3 {
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Microbiología y Bioanálisis</h1>
+            <p>Tu ruta académica personalizada</p>
+        </div>
+
+        <div class="progress-section">
+            <h2>Progreso Académico</h2>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">0 de 0 materias aprobadas</p>
+        </div>
+
+        <div class="tabs" id="semesterTabs"></div>
+        
+        <div class="semester-content">
+            <div class="subjects-grid" id="subjectsGrid"></div>
+        </div>
+
+        <div class="legend">
+            <h3>Leyenda</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #dcfce7; border: 2px solid #16a34a;"></div>
+                    <span>Aprobada</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #dbeafe; border: 2px solid #2563eb;"></div>
+                    <span>Cursando</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #f1f5f9; border: 2px solid #64748b;"></div>
+                    <span>Disponible</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #fef2f2; border: 2px solid #dc2626;"></div>
+                    <span>Bloqueada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos COMPLETOS de la malla curricular de Microbiología y Bioanálisis
+        const curriculumData = {
+            semesters: [
+                {
+                    id: 1,
+                    name: "Semestre I",
+                    subjects: [
+                        { id: "mat1", name: "Matemáticas I", credits: 2, prerequisites: [], type: "obligatoria" },
+                        { id: "qui1", name: "Química I", credits: 3, prerequisites: [], type: "obligatoria" },
+                        { id: "bio1", name: "Biología general", credits: 3, prerequisites: [], type: "obligatoria" },
+                        { id: "fis1", name: "Física", credits: 2, prerequisites: [], type: "obligatoria" },
+                        { id: "tal1", name: "Taller de lenguaje", credits: 3, prerequisites: [], type: "obligatoria" },
+                        { id: "ing1", name: "Lengua extranjera: Inglés I", credits: 2, prerequisites: [], type: "obligatoria" },
+                        { id: "cat1", name: "Cátedra UIS", credits: 1, prerequisites: [], type: "obligatoria" }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "Semestre II",
+                    subjects: [
+                        { id: "mat2", name: "Matemáticas II", credits: 2, prerequisites: ["mat1"], type: "obligatoria" },
+                        { id: "qui2", name: "Química II", credits: 4, prerequisites: ["qui1"], type: "obligatoria" },
+                        { id: "mic1", name: "Microbiología general", credits: 3, prerequisites: ["bio1"], type: "obligatoria" },
+                        { id: "mor1", name: "Morfofisiología", credits: 3, prerequisites: [], type: "obligatoria" },
+                        { id: "ing2", name: "Lengua extranjera: Inglés II", credits: 2, prerequisites: ["ing1"], type: "obligatoria" },
+                        { id: "ele1", name: "Electiva Formación Integral I", credits: 2, prerequisites: [], type: "electiva" }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: "Semestre III",
+                    subjects: [
+                        { id: "bio2", name: "Bioestadística", credits: 3, prerequisites: ["mat2"], type: "obligatoria" },
+                        { id: "bioq1", name: "Bioquímica I", credits: 3, prerequisites: ["qui2"], type: "obligatoria" },
+                        { id: "inm1", name: "Inmunología", credits: 3, prerequisites: ["bio1"], type: "obligatoria" },
+                        { id: "adm1", name: "Administración general", credits: 2, prerequisites: ["mat1"], type: "obligatoria" },
+                        { id: "bioet1", name: "Bioética", credits: 2, prerequisites: [], type: "obligatoria" },
+                        { id: "ing3", name: "Lengua extranjera: Inglés III", credits: 2, prerequisites: ["ing2"], type: "obligatoria" }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: "Semestre IV",
+                    subjects: [
+                        { id: "par1", name: "Parasitología", credits: 4, prerequisites: ["mic1"], type: "obligatoria" },
+                        { id: "fis2", name: "Fisiología microbiana", credits: 3, prerequisites: ["bioq1"], type: "obligatoria" },
+                        { id: "mic2", name: "Micología", credits: 3, prerequisites: ["mic1"], type: "obligatoria" },
+                        { id: "bio3", name: "Biología molecular", credits: 3, prerequisites: ["bioq1"], type: "obligatoria" },
+                        { id: "ing4", name: "Lengua extranjera: Inglés IV", credits: 2, prerequisites: ["ing3"], type: "obligatoria" },
+                        { id: "cul1", name: "Cultura física y deportiva", credits: 1, prerequisites: [], type: "obligatoria" }
+                    ]
+                },
+                {
+                    id: 5,
+                    name: "Semestre V",
+                    subjects: [
+                        { id: "bac1", name: "Bacteriología determinativa", credits: 3, prerequisites: ["par1", "fis2", "mic2", "bio3"], type: "obligatoria" },
+                        { id: "bioq2", name: "Bioquímica II", credits: 3, prerequisites: ["fis2"], type: "obligatoria" },
+                        { id: "vir1", name: "Virología", credits: 3, prerequisites: ["inm1"], type: "obligatoria" },
+                        { id: "gen1", name: "Genética", credits: 3, prerequisites: ["bio3"], type: "obligatoria" },
+                        { id: "epi1", name: "Epidemiología", credits: 2, prerequisites: ["bio2"], type: "obligatoria" },
+                        { id: "ele2", name: "Electiva Formación Integral II", credits: 2, prerequisites: [], type: "electiva" }
+                    ]
+                },
+                {
+                    id: 6,
+                    name: "Semestre VI",
+                    subjects: [
+                        { id: "hem1", name: "Hematología I", credits: 4, prerequisites: ["inm1"], type: "obligatoria" },
+                        { id: "quic1", name: "Química clínica", credits: 4, prerequisites: ["bioq2"], type: "obligatoria" },
+                        { id: "mica1", name: "Microbiología de alimentos", credits: 3, prerequisites: ["bac1"], type: "obligatoria" },
+                        { id: "sal1", name: "Salud pública", credits: 2, prerequisites: ["epi1"], type: "obligatoria" },
+                        { id: "ele3", name: "Electiva I", credits: 3, prerequisites: [], type: "electiva" }
+                    ]
+                },
+                {
+                    id: 7,
+                    name: "Semestre VII",
+                    subjects: [
+                        { id: "hem2", name: "Hematología II", credits: 2, prerequisites: ["hem1"], type: "obligatoria" },
+                        { id: "biot1", name: "Biotecnología", credits: 3, prerequisites: ["bio3"], type: "obligatoria" },
+                        { id: "mici1", name: "Microbiología Industrial", credits: 3, prerequisites: ["mica1"], type: "obligatoria" },
+                        { id: "fito1", name: "Fitopatología", credits: 3, prerequisites: ["mic2"], type: "obligatoria" },
+                        { id: "ele4", name: "Electiva II", credits: 3, prerequisites: [], type: "electiva" },
+                        { id: "ele5", name: "Electiva Formación Integral III", credits: 2, prerequisites: [], type: "electiva" }
+                    ]
+                },
+                {
+                    id: 8,
+                    name: "Semestre VIII",
+                    subjects: [
+                        { id: "ges1", name: "Gestión y Garantía de la Calidad en Laboratorios", credits: 2, prerequisites: ["adm1"], type: "obligatoria" },
+                        { id: "tox1", name: "Toxicología", credits: 3, prerequisites: ["quic1"], type: "obligatoria" },
+                        { id: "mica2", name: "Microbiología ambiental", credits: 3, prerequisites: ["biot1"], type: "obligatoria" },
+                        { id: "met1", name: "Metodología de la investigación", credits: 2, prerequisites: ["sal1"], type: "obligatoria" },
+                        { id: "ele6", name: "Electiva III", credits: 3, prerequisites: [], type: "electiva" },
+                        { id: "ele7", name: "Electiva IV", credits: 3, prerequisites: [], type: "electiva" }
+                    ]
+                },
+                {
+                    id: 9,
+                    name: "Semestre IX",
+                    subjects: [
+                        { id: "pra1", name: "Práctica Profesional I", credits: 17, prerequisites: ["ges1", "tox1", "mica2", "met1"], type: "obligatoria" }
+                    ]
+                },
+                {
+                    id: 10,
+                    name: "Semestre X",
+                    subjects: [
+                        { id: "pra2", name: "Práctica Profesional II", credits: 17, prerequisites: ["pra1"], type: "obligatoria" }
+                    ]
+                }
+            ]
+        };
+
+        // Estado de las materias
+        let subjectStates = JSON.parse(localStorage.getItem('subjectStates')) || {};
+
+        // Semestre activo
+        let activeSemester = 1;
+
+        // Inicializar la aplicación
+        function init() {
+            createTabs();
+            showSemester(1);
+            updateProgress();
+        }
+
+        // Crear pestañas de semestres
+        function createTabs() {
+            const tabsContainer = document.getElementById('semesterTabs');
+            tabsContainer.innerHTML = '';
+
+            curriculumData.semesters.forEach(semester => {
+                const tab = document.createElement('button');
+                tab.className = `tab ${semester.id === activeSemester ? 'active' : ''}`;
+                tab.textContent = semester.name;
+                tab.onclick = () => showSemester(semester.id);
+                tabsContainer.appendChild(tab);
+            });
+        }
+
+        // Mostrar semestre
+        function showSemester(semesterId) {
+            activeSemester = semesterId;
+            
+            // Actualizar pestañas
+            document.querySelectorAll('.tab').forEach((tab, index) => {
+                tab.classList.toggle('active', index + 1 === semesterId);
+            });
+
+            // Mostrar materias
+            const semester = curriculumData.semesters.find(s => s.id === semesterId);
+            const grid = document.getElementById('subjectsGrid');
+            grid.innerHTML = '';
+
+            semester.subjects.forEach(subject => {
+                const card = createSubjectCard(subject);
+                grid.appendChild(card);
+            });
+        }
+
+        // Crear tarjeta de materia
+        function createSubjectCard(subject) {
+            const card = document.createElement('div');
+            const state = getSubjectState(subject.id);
+            const isBlocked = isSubjectBlocked(subject);
+            
+            card.className = `subject-card ${state} ${isBlocked ? 'blocked' : ''}`;
+            
+            if (!isBlocked) {
+                card.onclick = () => toggleSubjectState(subject.id);
+            }
+
+            const statusText = isBlocked ? 'Bloqueada' : 
+                              state === 'approved' ? 'Aprobada' :
+                              state === 'in-progress' ? 'Cursando' : 'Disponible';
+
+            const statusClass = isBlocked ? 'status-blocked' :
+                               state === 'approved' ? 'status-approved' :
+                               state === 'in-progress' ? 'status-in-progress' : 'status-available';
+
+            const prerequisites = subject.prerequisites.length > 0 ? 
+                `<div class="prerequisites">Prerrequisitos: ${subject.prerequisites.map(p => getSubjectName(p)).join(', ')}</div>` : '';
+
+            card.innerHTML = `
+                <div class="subject-name">${subject.name}</div>
+                <div class="subject-info">
+                    <span>${subject.credits} créditos</span>
+                    <span class="subject-status ${statusClass}">${statusText}</span>
+                </div>
+                ${prerequisites}
+            `;
+
+            return card;
+        }
+
+        // Obtener nombre de materia por ID
+        function getSubjectName(subjectId) {
+            for (const semester of curriculumData.semesters) {
+                const subject = semester.subjects.find(s => s.id === subjectId);
+                if (subject) return subject.name;
+            }
+            return subjectId;
+        }
+
+        // Obtener estado de materia
+        function getSubjectState(subjectId) {
+            return subjectStates[subjectId] || 'available';
+        }
+
+        // Verificar si materia está bloqueada
+        function isSubjectBlocked(subject) {
+            return subject.prerequisites.some(prereq => 
+                getSubjectState(prereq) !== 'approved'
+            );
+        }
+
+        // Cambiar estado de materia
+        function toggleSubjectState(subjectId) {
+            const currentState = getSubjectState(subjectId);
+            
+            let newState;
+            if (currentState === 'available') {
+                newState = 'in-progress';
+            } else if (currentState === 'in-progress') {
+                newState = 'approved';
+            } else {
+                newState = 'available';
+            }
+
+            subjectStates[subjectId] = newState;
+            localStorage.setItem('subjectStates', JSON.stringify(subjectStates));
+            
+            showSemester(activeSemester);
+            updateProgress();
+        }
+
+        // Actualizar progreso
+        function updateProgress() {
+            const totalSubjects = curriculumData.semesters.reduce((total, semester) => 
+                total + semester.subjects.length, 0);
+            
+            const approvedSubjects = Object.values(subjectStates).filter(state => 
+                state === 'approved').length;
+            
+            const percentage = totalSubjects > 0 ? (approvedSubjects / totalSubjects) * 100 : 0;
+            
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('progressText').textContent = 
+                `${approvedSubjects} de ${totalSubjects} materias aprobadas`;
+        }
+
+        // Inicializar cuando se carga la página
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
