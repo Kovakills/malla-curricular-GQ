@@ -1,0 +1,507 @@
+export type SubjectStatus = "available" | "current" | "approved" | "locked"
+
+export interface Subject {
+  code: string
+  name: string
+  credits: number
+  prerequisites?: string[]
+  type: "Obligatoria" | "Electiva"
+  department: string
+}
+
+export interface Semester {
+  level: number
+  subjects: Subject[]
+}
+
+export interface CurriculumData {
+  semesters: Semester[]
+  electives: Subject[]
+}
+
+export const curriculumData: CurriculumData = {
+  semesters: [
+    {
+      level: 1,
+      subjects: [
+        {
+          code: "MAT1",
+          name: "Matemáticas I",
+          credits: 2,
+          type: "Obligatoria",
+          department: "Escuela de Matemáticas",
+        },
+        {
+          code: "QUI1",
+          name: "Química I",
+          credits: 3,
+          type: "Obligatoria",
+          department: "Escuela de Química",
+        },
+        {
+          code: "BIO1",
+          name: "Biología general",
+          credits: 3,
+          type: "Obligatoria",
+          department: "Escuela de Biología",
+        },
+        {
+          code: "FIS1",
+          name: "Física",
+          credits: 2,
+          type: "Obligatoria",
+          department: "Escuela de Física",
+        },
+        {
+          code: "LEN1",
+          name: "Taller de lenguaje",
+          credits: 3,
+          type: "Obligatoria",
+          department: "Escuela de Idiomas",
+        },
+        {
+          code: "ING1",
+          name: "Lengua extranjera: Inglés I",
+          credits: 2,
+          type: "Obligatoria",
+          department: "Instituto de Lenguas",
+        },
+        {
+          code: "CAT1",
+          name: "Cátedra UIS",
+          credits: 1,
+          type: "Obligatoria",
+          department: "Vicerrectoría Académica",
+        },
+      ],
+    },
+    {
+      level: 2,
+      subjects: [
+        {
+          code: "MAT2",
+          name: "Matemáticas II",
+          credits: 2,
+          prerequisites: ["MAT1"],
+          type: "Obligatoria",
+          department: "Escuela de Matemáticas",
+        },
+        {
+          code: "QUI2",
+          name: "Química II",
+          credits: 4,
+          prerequisites: ["QUI1"],
+          type: "Obligatoria",
+          department: "Escuela de Química",
+        },
+        {
+          code: "MIC1",
+          name: "Microbiología general",
+          credits: 3,
+          prerequisites: ["BIO1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "MOR1",
+          name: "Morfofisiología",
+          credits: 3,
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "ING2",
+          name: "Lengua extranjera: Inglés II",
+          credits: 2,
+          prerequisites: ["ING1"],
+          type: "Obligatoria",
+          department: "Instituto de Lenguas",
+        },
+        {
+          code: "ELE1",
+          name: "Electiva Formación Integral I",
+          credits: 2,
+          type: "Electiva",
+          department: "Varias",
+        },
+      ],
+    },
+    {
+      level: 3,
+      subjects: [
+        {
+          code: "EST1",
+          name: "Bioestadística",
+          credits: 3,
+          prerequisites: ["MAT2"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "BIO2",
+          name: "Bioquímica I",
+          credits: 3,
+          prerequisites: ["QUI2"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "INM1",
+          name: "Inmunología",
+          credits: 3,
+          prerequisites: ["BIO1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "ADM1",
+          name: "Administración general",
+          credits: 2,
+          prerequisites: ["MAT1"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "BET1",
+          name: "Bioética",
+          credits: 2,
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "ING3",
+          name: "Lengua extranjera: Inglés III",
+          credits: 2,
+          prerequisites: ["ING2"],
+          type: "Obligatoria",
+          department: "Instituto de Lenguas",
+        },
+      ],
+    },
+    {
+      level: 4,
+      subjects: [
+        {
+          code: "PAR1",
+          name: "Parasitología",
+          credits: 4,
+          prerequisites: ["MIC1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "FIS2",
+          name: "Fisiología microbiana",
+          credits: 3,
+          prerequisites: ["BIO2"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "MIC2",
+          name: "Micología",
+          credits: 3,
+          prerequisites: ["MIC1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "BIO3",
+          name: "Biología molecular",
+          credits: 3,
+          prerequisites: ["BIO2"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "ING4",
+          name: "Lengua extranjera: Inglés IV",
+          credits: 2,
+          prerequisites: ["ING3"],
+          type: "Obligatoria",
+          department: "Instituto de Lenguas",
+        },
+        {
+          code: "DEP1",
+          name: "Cultura física y deportiva",
+          credits: 1,
+          type: "Obligatoria",
+          department: "Departamento de Cultura Física",
+        },
+      ],
+    },
+    {
+      level: 5,
+      subjects: [
+        {
+          code: "BAC1",
+          name: "Bacteriología determinativa",
+          credits: 3,
+          prerequisites: ["Nivel IV"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "BIO4",
+          name: "Bioquímica II",
+          credits: 3,
+          prerequisites: ["FIS2"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "VIR1",
+          name: "Virología",
+          credits: 3,
+          prerequisites: ["INM1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "GEN1",
+          name: "Genética",
+          credits: 3,
+          prerequisites: ["BIO3"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "EPI1",
+          name: "Epidemiología",
+          credits: 2,
+          prerequisites: ["EST1"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "ELE2",
+          name: "Electiva Formación Integral II",
+          credits: 2,
+          type: "Electiva",
+          department: "Varias",
+        },
+      ],
+    },
+    {
+      level: 6,
+      subjects: [
+        {
+          code: "HEM1",
+          name: "Hematología I",
+          credits: 4,
+          prerequisites: ["INM1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "QUI3",
+          name: "Química clínica",
+          credits: 4,
+          prerequisites: ["BIO4"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "MIC3",
+          name: "Microbiología de alimentos",
+          credits: 3,
+          prerequisites: ["BAC1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "SAL1",
+          name: "Salud pública",
+          credits: 2,
+          prerequisites: ["EPI1"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "ELE3",
+          name: "Electiva I",
+          credits: 3,
+          type: "Electiva",
+          department: "Varias",
+        },
+      ],
+    },
+    {
+      level: 7,
+      subjects: [
+        {
+          code: "HEM2",
+          name: "Hematología II",
+          credits: 2,
+          prerequisites: ["HEM1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "BIO5",
+          name: "Biotecnología",
+          credits: 3,
+          prerequisites: ["BIO3"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "MIC4",
+          name: "Microbiología Industrial",
+          credits: 3,
+          prerequisites: ["MIC3"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "FIT1",
+          name: "Fitopatología",
+          credits: 3,
+          prerequisites: ["MIC2"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "ELE4",
+          name: "Electiva II",
+          credits: 3,
+          type: "Electiva",
+          department: "Varias",
+        },
+        {
+          code: "ELE5",
+          name: "Electiva Formación Integral III",
+          credits: 2,
+          type: "Electiva",
+          department: "Varias",
+        },
+      ],
+    },
+    {
+      level: 8,
+      subjects: [
+        {
+          code: "GES1",
+          name: "Gestión y Garantía de la Calidad en Laboratorios",
+          credits: 2,
+          prerequisites: ["ADM1"],
+          type: "Obligatoria",
+          department: "Escuela de Medicina",
+        },
+        {
+          code: "TOX1",
+          name: "Toxicología",
+          credits: 3,
+          prerequisites: ["QUI3"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "MIC5",
+          name: "Microbiología ambiental",
+          credits: 3,
+          prerequisites: ["BIO5"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "MET1",
+          name: "Metodología de la investigación",
+          credits: 2,
+          prerequisites: ["SAL1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+        {
+          code: "ELE6",
+          name: "Electiva III",
+          credits: 3,
+          type: "Electiva",
+          department: "Varias",
+        },
+        {
+          code: "ELE7",
+          name: "Electiva IV",
+          credits: 3,
+          type: "Electiva",
+          department: "Varias",
+        },
+      ],
+    },
+    {
+      level: 9,
+      subjects: [
+        {
+          code: "PRA1",
+          name: "Práctica Profesional I",
+          credits: 17,
+          prerequisites: ["Nivel VIII"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+      ],
+    },
+    {
+      level: 10,
+      subjects: [
+        {
+          code: "PRA2",
+          name: "Práctica Profesional II",
+          credits: 17,
+          prerequisites: ["PRA1"],
+          type: "Obligatoria",
+          department: "Escuela de Microbiología",
+        },
+      ],
+    },
+  ],
+  electives: [
+    {
+      code: "MICL1",
+      name: "Microbiología clínica e infectología",
+      credits: 3,
+      prerequisites: ["BAC1"],
+      type: "Electiva",
+      department: "Escuela de Microbiología",
+    },
+    {
+      code: "PAT1",
+      name: "Patología y citología",
+      credits: 3,
+      prerequisites: ["MOR1"],
+      type: "Electiva",
+      department: "Escuela de Medicina",
+    },
+    {
+      code: "TOXA1",
+      name: "Toxicología ambiental",
+      credits: 3,
+      prerequisites: ["BIO4"],
+      type: "Electiva",
+      department: "Escuela de Microbiología",
+    },
+    {
+      code: "PAUX1",
+      name: "Primeros auxilios",
+      credits: 3,
+      type: "Electiva",
+      department: "Escuela de Enfermería",
+    },
+    {
+      code: "BINF1",
+      name: "Bioinformática",
+      credits: 3,
+      prerequisites: ["BIO3"],
+      type: "Electiva",
+      department: "Escuela de Ingeniería de Sistemas",
+    },
+    {
+      code: "PARV1",
+      name: "Parasitología humana y veterinaria",
+      credits: 3,
+      prerequisites: ["PAR1"],
+      type: "Electiva",
+      department: "Escuela de Microbiología",
+    },
+  ],
+}
