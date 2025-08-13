@@ -1,108 +1,1426 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Malla Curricular - Microbiología y Bioanálisis</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="favicon.ico">
-    <meta name="theme-color" content="#2563eb">
-    <meta name="description" content="Aplicación para seguimiento de malla curricular de Microbiología y Bioanálisis">
-    
-    <!-- PWA Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Malla Curricular">
-    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+    --primary: #0f766e;
+    --primary-light: #14b8a6;
+    --primary-dark: #0d5d56;
+    --secondary: #f59e0b;
+    --accent: #ec4899;
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #e5e5e5;
+    --neutral-300: #d4d4d4;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, var(--neutral-50) 0%, #f0fdfa 50%, #ecfdf5 100%);
+    color: var(--neutral-800);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
+    color: white;
+    padding: 3rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M40 40c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20zm20 0c0-11.046-8.954-20-20-20s-20 8.954-20 20 8.954 20 20 20 20-8.954 20-20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: -0.025em;
+}
+
+header p {
+    margin: 0.75rem 0 0;
+    opacity: 0.95;
+    font-size: 1.125rem;
+    position: relative;
+    z-index: 1;
+    font-weight: 400;
+}
+
+main {
+    max-width: 1400px;
+    margin: -2rem auto 0;
+    padding: 0 1rem 4rem;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--neutral-200);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--secondary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-4px);
+    border-color: var(--primary-light);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card h2 {
+    margin: 0 0 1.5rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    letter-spacing: -0.025em;
+}
+
+.card h2::before {
+    content: '';
+    width: 5px;
+    height: 2rem;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(15, 118, 110, 0.3);
+}
+
+.summary-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: rotate(0deg); opacity: 0.5; }
+    50% { transform: rotate(180deg); opacity: 0.8; }
+}
+
+.summary-card h2 {
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.summary-card h2::before {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+}
+
+.summary-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 1.25rem;
+    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    opacity: 0.95;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+th {
+    background: linear-gradient(135deg, var(--neutral-100), var(--neutral-50));
+    color: var(--neutral-700);
+    font-weight: 700;
+    padding: 1.25rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid var(--neutral-200);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--neutral-200);
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+
+tr:hover td {
+    background-color: var(--neutral-50);
+    transform: scale(1.01);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.tipo-obligatoria {
+    background: linear-gradient(135deg, var(--success), #059669);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.tipo-electiva {
+    background: linear-gradient(135deg, var(--secondary), #d97706);
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+}
+
+.subtot {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--neutral-200);
+    align-items: center;
+}
+
+.pill {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    box-shadow: 0 4px 8px rgba(15, 118, 110, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+.pill:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(15, 118, 110, 0.4);
+}
+
+.electivas-list {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.electiva-item {
+    background: var(--neutral-50);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border-left: 5px solid var(--secondary);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.electiva-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    transition: width 0.3s ease;
+}
+
+.electiva-item:hover {
+    background: white;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(4px);
+}
+
+.electiva-item:hover::before {
+    width: 8px;
+}
+
+.electiva-title {
+    font-weight: 700;
+    color: var(--neutral-800);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    letter-spacing: -0.025em;
+}
+
+.electiva-details {
+    font-size: 0.875rem;
+    color: var(--neutral-600);
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    background: var(--neutral-100);
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+}
+
+.electiva-type {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #db2777);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    box-shadow: 0 2px 4px rgba(236, 72, 153, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 2rem 1rem;
+    }
+
+    header h1 {
+        font-size: 1.75rem;
+    }
+
+    main {
+        padding: 0 0.75rem 3rem;
+        margin-top: -1rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+        margin-bottom: 1.25rem;
+        border-radius: 16px;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .summary-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .subtot {
+        gap: 1rem;
+    }
+
+    .pill {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card {
+        padding: 1rem;
+    }
+
+    .summary-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animaciones mejoradas */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:nth-child(even) {
+    animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation-delay: 0.1s;
+}
+
+.card:nth-child(3n) {
+    animation-delay: 0.2s;
+}
+
+/* Scroll suave y mejoras de accesibilidad */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus states para accesibilidad */
+.card:focus-within {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* Mejoras de contraste */
+@media (prefers-contrast: high) {
+    :root {
+        --neutral-600: #404040;
+        --neutral-700: #262626;
+    }
+}
+
+/* Respeto por preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+    </style>
 </head>
+
 <body>
-    <div class="app">
-        <!-- Header -->
-        <header class="header">
-            <div class="container">
-                <div class="header-content">
-                    <div class="header-title">
-                        <svg class="graduation-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-                        </svg>
-                        <div>
-                            <h1>Microbiología y Bioanálisis</h1>
-                            <p>Tu ruta académica personalizada</p>
-                        </div>
-                    </div>
+    <header>
+        <h1>🧬 Malla Curricular - Microbiología y Bioanálisis</h1>
+        <p>Universidad Industrial de Santander • Reforma Curricular 2024</p>
+    </header>
 
-                    <!-- Progress Bar -->
-                    <div class="progress-container">
-                        <div class="progress-header">
-                            <span>Progreso Académico</span>
-                            <span class="progress-percentage" id="progressPercentage">0%</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill"></div>
-                        </div>
-                        <p class="progress-text" id="progressText">0 de 0 materias aprobadas</p>
-                    </div>
+    <main>
+        <section class="card summary-card">
+            <h2>📊 Resumen del Programa</h2>
+            <div class="summary-stats">
+                <div class="stat-item">
+                    <div class="stat-number">131</div>
+                    <div class="stat-label">Horas Teóricas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">181</div>
+                    <div class="stat-label">Horas Prácticas</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">149</div>
+                    <div class="stat-label">HTI Total</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">161</div>
+                    <div class="stat-label">Créditos Totales</div>
                 </div>
             </div>
-        </header>
+        </section>
 
-        <!-- Main Content -->
-        <main class="main">
-            <div class="container">
-                <!-- Semester Tabs -->
-                <div class="tabs-container">
-                    <div class="tabs-list" id="tabsList">
-                        <!-- Tabs will be generated by JavaScript -->
-                    </div>
+        <!-- Nivel I -->
+        <section class="card" id="nivel-1">
+            <h2>Nivel I — Fundamentos Básicos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Matemáticas I</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Química I</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biología general</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Física</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Taller de lenguaje</strong></td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inglés I</strong></td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Certificar nivel A1</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cátedra UIS</strong></td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal I: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel II -->
+        <section class="card" id="nivel-2">
+            <h2>Nivel II — Ciencias Básicas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Matemáticas II</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Matemáticas I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Química II</strong></td>
+                        <td>4</td>
+                        <td>2</td>
+                        <td>6</td>
+                        <td>4</td>
+                        <td>Química I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microbiología general</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Biología general</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Morfofisiología</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inglés II</strong></td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Inglés I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva Formación Integral I</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal II: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel III -->
+        <section class="card" id="nivel-3">
+            <h2>Nivel III — Ciencias Aplicadas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bioestadística</strong></td>
+                        <td>4</td>
+                        <td>0</td>
+                        <td>5</td>
+                        <td>3</td>
+                        <td>Matemáticas II</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bioquímica I</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Química II</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inmunología</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Biología general</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administración general</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Matemáticas I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bioética</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inglés III</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Inglés II</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal III: 15 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel IV -->
+        <section class="card" id="nivel-4">
+            <h2>Nivel IV — Especialización Básica</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Parasitología</strong></td>
+                        <td>3</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>Microbiología general</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fisiología microbiana</strong></td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>Bioquímica I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Micología</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Microbiología general</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biología molecular</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Bioquímica I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Inglés IV</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Inglés III o certificación B1</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cultura física y deportiva</strong></td>
+                        <td>0</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>—</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal IV: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel V -->
+        <section class="card" id="nivel-5">
+            <h2>Nivel V — Profundización</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Bacteriología determinativa</strong></td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Nivel IV</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bioquímica II</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Fisiología microbiana</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Virología</strong></td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Inmunología</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Genética</strong></td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Biología molecular</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Epidemiología</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Bioestadística</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva Formación Integral II</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal V: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel VI -->
+        <section class="card" id="nivel-6">
+            <h2>Nivel VI — Análisis Clínico</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hematología I</strong></td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>Inmunología</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Química clínica</strong></td>
+                        <td>2</td>
+                        <td>6</td>
+                        <td>4</td>
+                        <td>4</td>
+                        <td>Bioquímica II</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microbiología de alimentos</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Bacteriología determinativa</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Salud pública</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Epidemiología</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva I</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal VI: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel VII -->
+        <section class="card" id="nivel-7">
+            <h2>Nivel VII — Especialización Avanzada</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hematología II</strong></td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Hematología I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biotecnología</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Biología molecular</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microbiología Industrial</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Microbiología de alimentos</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fitopatología</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Micología</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva II</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva Formación Integral III</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal VII: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel VIII -->
+        <section class="card" id="nivel-8">
+            <h2>Nivel VIII — Gestión y Calidad</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Gestión y Garantía de la Calidad en Laboratorios</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Administración general</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Toxicología</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Química clínica</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microbiología ambiental</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Biotecnología</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Metodología de la investigación</strong></td>
+                        <td>3</td>
+                        <td>0</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>Salud pública</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva III</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Electiva IV</strong></td>
+                        <td>2</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>Según electiva</td>
+                        <td><span class="tipo-electiva">Electiva</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">📚 Subtotal VIII: 16 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel IX -->
+        <section class="card" id="nivel-9">
+            <h2>Nivel IX — Práctica Profesional I</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Práctica Profesional I</strong></td>
+                        <td>0</td>
+                        <td>40</td>
+                        <td>0</td>
+                        <td>17</td>
+                        <td>Nivel VIII</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">🏥 Subtotal IX: 17 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Nivel X -->
+        <section class="card" id="nivel-10">
+            <h2>Nivel X — Práctica Profesional II</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Asignatura</th>
+                        <th>T</th>
+                        <th>P</th>
+                        <th>HTI</th>
+                        <th>Créditos</th>
+                        <th>Requisito</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Práctica Profesional II</strong></td>
+                        <td>0</td>
+                        <td>40</td>
+                        <td>0</td>
+                        <td>17</td>
+                        <td>Práctica Profesional I</td>
+                        <td><span class="tipo-obligatoria">Obligatoria</span></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtot">
+                <div class="pill">🏥 Subtotal X: 17 Créditos</div>
+            </div>
+        </section>
+
+        <!-- Electivas -->
+        <section class="card" id="electivas">
+            <h2>🎯 Actividades Académicas Electivas</h2>
+            <p style="color: var(--neutral-600); margin-bottom: 1.5rem;">Electivas disciplinarias y transdisciplinares
+                disponibles en el programa:</p>
+
+            <div class="electivas-list">
+                <div class="electiva-item">
+                    <div class="electiva-title">Microbiología clínica e infectología</div>
+                    <div class="electiva-details">3T • 3P • 3HTI • 3 créditos • Req: Bacteriología Determinativa</div>
+                    <span class="electiva-type">Disciplinar</span>
                 </div>
 
-                <!-- Semester Content -->
-                <div class="semester-content" id="semesterContent">
-                    <!-- Content will be generated by JavaScript -->
+                <div class="electiva-item">
+                    <div class="electiva-title">Patología y citología</div>
+                    <div class="electiva-details">2T • 4P • 3HTI • 3 créditos • Req: Morfofisiología</div>
+                    <span class="electiva-type">Disciplinar</span>
                 </div>
 
-                <!-- Legend -->
-                <div class="legend">
-                    <h3>Leyenda</h3>
-                    <div class="legend-items">
-                        <div class="legend-item">
-                            <svg class="icon approved" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 12l2 2 4-4"/>
-                                <circle cx="12" cy="12" r="10"/>
-                            </svg>
-                            <span>Aprobada</span>
-                        </div>
-                        <div class="legend-item">
-                            <svg class="icon current" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                            </svg>
-                            <span>Cursando</span>
-                        </div>
-                        <div class="legend-item">
-                            <svg class="icon available" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                            </svg>
-                            <span>Disponible</span>
-                        </div>
-                        <div class="legend-item">
-                            <svg class="icon locked" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                            <span>Bloqueada</span>
-                        </div>
-                    </div>
+                <div class="electiva-item">
+                    <div class="electiva-title">Toxicología ambiental</div>
+                    <div class="electiva-details">2T • 4P • 3HTI • 3 créditos • Req: Bioquímica II</div>
+                    <span class="electiva-type">Disciplinar</span>
+                </div>
+
+                <div class="electiva-item">
+                    <div class="electiva-title">Primeros auxilios</div>
+                    <div class="electiva-details">3T • 3P • 3HTI • 3 créditos</div>
+                    <span class="electiva-type">Transdisciplinar</span>
+                </div>
+
+                <div class="electiva-item">
+                    <div class="electiva-title">Bioinformática</div>
+                    <div class="electiva-details">4T • 0P • 5HTI • 3 créditos • Req: Biología molecular</div>
+                    <span class="electiva-type">Transdisciplinar</span>
+                </div>
+
+                <div class="electiva-item">
+                    <div class="electiva-title">Parasitología humana y veterinaria</div>
+                    <div class="electiva-details">2T • 4P • 3HTI • 3 créditos • Req: Parasitología</div>
+                    <span class="electiva-type">Disciplinar</span>
                 </div>
             </div>
-        </main>
-    </div>
+        </section>
+    </main>
+    <script>
+        const materias = [
+            // ===== SEMESTRE I =====
+            { id: "MAT1", nombre: "Matemáticas I", requisito: [], creditos: 2 },
+            { id: "QUI1", nombre: "Química I", requisito: [], creditos: 3 },
+            { id: "BIO1", nombre: "Biología general", requisito: [], creditos: 3 },
+            { id: "FIS1", nombre: "Física", requisito: [], creditos: 2 },
+            { id: "TALLEN", nombre: "Taller de lenguaje", requisito: [], creditos: 3 },
+            { id: "ING1", nombre: "Inglés I", requisito: [], creditos: 2 },
+            { id: "CATUIS", nombre: "Cátedra UIS", requisito: [], creditos: 1 },
 
-    <script src="curriculum-data.js"></script>
-    <script src="app.js"></script>
+            // ===== SEMESTRE II =====
+            { id: "MAT2", nombre: "Matemáticas II", requisito: ["MAT1"], creditos: 2 },
+            { id: "QUI2", nombre: "Química II", requisito: ["QUI1"], creditos: 3 },
+            { id: "BIOQ1", nombre: "Bioquímica I", requisito: ["QUI2"], creditos: 3 },
+            { id: "MIC1", nombre: "Microbiología general", requisito: ["BIO1"], creditos: 3 },
+            { id: "FIS2", nombre: "Física II", requisito: ["FIS1"], creditos: 2 },
+            { id: "ING2", nombre: "Inglés II", requisito: ["ING1"], creditos: 2 },
+
+            // ===== SEMESTRE III =====
+            { id: "QUIA", nombre: "Química analítica", requisito: ["QUI2"], creditos: 3 },
+            { id: "BIOQ2", nombre: "Bioquímica II", requisito: ["BIOQ1"], creditos: 3 },
+            { id: "MIC2", nombre: "Microbiología de alimentos", requisito: ["MIC1"], creditos: 3 },
+            { id: "PAR1", nombre: "Parasitología I", requisito: ["BIO1"], creditos: 3 },
+            { id: "GEN1", nombre: "Genética general", requisito: ["BIO1"], creditos: 3 },
+            { id: "ING3", nombre: "Inglés III", requisito: ["ING2"], creditos: 2 },
+
+            // ===== SEMESTRE IV =====
+            { id: "QUIB", nombre: "Química biológica", requisito: ["QUIA"], creditos: 3 },
+            { id: "BIOQ3", nombre: "Bioquímica clínica", requisito: ["BIOQ2"], creditos: 3 },
+            { id: "MIC3", nombre: "Microbiología clínica I", requisito: ["MIC2"], creditos: 3 },
+            { id: "PAR2", nombre: "Parasitología II", requisito: ["PAR1"], creditos: 3 },
+            { id: "IMM1", nombre: "Inmunología", requisito: ["BIO1"], creditos: 3 },
+            { id: "ING4", nombre: "Inglés IV", requisito: ["ING3"], creditos: 2 },
+
+            // ===== SEMESTRE V =====
+            { id: "FISIO", nombre: "Fisiología humana", requisito: ["BIO1"], creditos: 3 },
+            { id: "BIOQ4", nombre: "Técnicas bioquímicas", requisito: ["BIOQ3"], creditos: 3 },
+            { id: "MIC4", nombre: "Microbiología clínica II", requisito: ["MIC3"], creditos: 3 },
+            { id: "PAR3", nombre: "Parasitología clínica", requisito: ["PAR2"], creditos: 3 },
+            { id: "IMM2", nombre: "Inmunología clínica", requisito: ["IMM1"], creditos: 3 },
+            { id: "EPI1", nombre: "Epidemiología", requisito: [], creditos: 2 },
+
+            // ===== SEMESTRE VI =====
+            { id: "PATO1", nombre: "Patología general", requisito: ["FISIO"], creditos: 3 },
+            { id: "BIOQ5", nombre: "Bioquímica avanzada", requisito: ["BIOQ4"], creditos: 3 },
+            { id: "MIC5", nombre: "Microbiología ambiental", requisito: ["MIC4"], creditos: 3 },
+            { id: "VIRO1", nombre: "Virología", requisito: ["MIC4"], creditos: 3 },
+            { id: "PAR4", nombre: "Parasitología avanzada", requisito: ["PAR3"], creditos: 3 },
+            { id: "EPI2", nombre: "Epidemiología clínica", requisito: ["EPI1"], creditos: 2 },
+
+            // ===== SEMESTRE VII =====
+            { id: "PATO2", nombre: "Patología clínica", requisito: ["PATO1"], creditos: 3 },
+            { id: "BIOQ6", nombre: "Bioquímica patológica", requisito: ["BIOQ5"], creditos: 3 },
+            { id: "MIC6", nombre: "Microbiología industrial", requisito: ["MIC5"], creditos: 3 },
+            { id: "VIRO2", nombre: "Virología clínica", requisito: ["VIRO1"], creditos: 3 },
+            { id: "PAR5", nombre: "Parasitología industrial", requisito: ["PAR4"], creditos: 3 },
+            { id: "INV1", nombre: "Metodología de la investigación", requisito: [], creditos: 2 },
+
+            // ===== SEMESTRE VIII =====
+            { id: "PATO3", nombre: "Patología especializada", requisito: ["PATO2"], creditos: 3 },
+            { id: "BIOQ7", nombre: "Bioquímica aplicada", requisito: ["BIOQ6"], creditos: 3 },
+            { id: "MIC7", nombre: "Microbiología aplicada", requisito: ["MIC6"], creditos: 3 },
+            { id: "VIRO3", nombre: "Virología aplicada", requisito: ["VIRO2"], creditos: 3 },
+            { id: "PAR6", nombre: "Parasitología aplicada", requisito: ["PAR5"], creditos: 3 },
+            { id: "INV2", nombre: "Proyecto de investigación I", requisito: ["INV1"], creditos: 2 },
+
+            // ===== SEMESTRE IX =====
+            { id: "LAB1", nombre: "Práctica profesional I", requisito: ["PATO3"], creditos: 6 },
+            { id: "INV3", nombre: "Proyecto de investigación II", requisito: ["INV2"], creditos: 2 },
+            { id: "OPT1", nombre: "Electiva profesional I", requisito: [], creditos: 2 },
+            { id: "OPT2", nombre: "Electiva profesional II", requisito: [], creditos: 2 },
+
+            // ===== SEMESTRE X =====
+            { id: "LAB2", nombre: "Práctica profesional II", requisito: ["LAB1"], creditos: 6 },
+            { id: "INV4", nombre: "Proyecto de investigación III", requisito: ["INV3"], creditos: 2 },
+            { id: "OPT3", nombre: "Electiva profesional III", requisito: [], creditos: 2 },
+            { id: "OPT4", nombre: "Electiva profesional IV", requisito: [], creditos: 2 },
+        ];
+
+        let estados = JSON.parse(localStorage.getItem("estadosMalla")) || {};
+        const TOTAL_CREDITOS = 161;
+
+        function inicializarMalla() {
+            materias.forEach(mat => {
+                const filas = [...document.querySelectorAll("tr")];
+                const fila = filas.find(f => f.textContent.trim().startsWith(mat.nombre));
+                if (!fila) return;
+
+                // Agregar select si no existe
+                if (!fila.dataset.selectAdded) {
+                    const celda = document.createElement("td");
+                    const select = document.createElement("select");
+                    select.innerHTML = `
+                <option value="nocursada">No cursada</option>
+                <option value="cursando">Cursando</option>
+                <option value="aprobada">Aprobada</option>
+                <option value="reprobada">Reprobada</option>
+            `;
+                    celda.appendChild(select);
+                    fila.appendChild(celda);
+                    fila.dataset.selectAdded = true;
+                }
+
+                const select = fila.querySelector("select");
+                const estado = estados[mat.id] || "nocursada";
+                select.value = estado;
+
+                // Habilitar/deshabilitar según requisitos
+                const habilitada = mat.requisito.every(req => estados[req] === "aprobada");
+                select.disabled = !habilitada && estado !== "aprobada";
+
+                // Colores por estado
+                fila.classList.remove("estado-aprobada", "estado-cursando", "estado-reprobada", "bloqueada");
+                if (!habilitada && estado !== "aprobada") {
+                    fila.classList.add("bloqueada");
+                } else {
+                    if (estado === "aprobada") fila.classList.add("estado-aprobada");
+                    if (estado === "cursando") fila.classList.add("estado-cursando");
+                    if (estado === "reprobada") fila.classList.add("estado-reprobada");
+                }
+
+                // Evento de cambio
+                select.onchange = () => {
+                    estados[mat.id] = select.value;
+                    localStorage.setItem("estadosMalla", JSON.stringify(estados));
+                    inicializarMalla();
+                };
+            });
+
+            actualizarProgreso();
+        }
+
+        function actualizarProgreso() {
+            let creditosAprobados = 0;
+            materias.forEach(mat => {
+                if (estados[mat.id] === "aprobada") {
+                    creditosAprobados += mat.creditos;
+                }
+            });
+            const porcentaje = Math.round((creditosAprobados / TOTAL_CREDITOS) * 100);
+            document.getElementById("progress-bar").style.width = porcentaje + "%";
+            document.getElementById("progress-bar").textContent = porcentaje + "%";
+            document.getElementById("progress-text").textContent = `${creditosAprobados} / ${TOTAL_CREDITOS} créditos aprobados`;
+        }
+
+        inicializarMalla();
+    </script>
+
 </body>
+
 </html>
